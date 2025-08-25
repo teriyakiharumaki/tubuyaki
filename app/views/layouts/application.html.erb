@@ -28,7 +28,6 @@
         <a class="navbar-brand" href="/">tubuyaki</a>
         <div class="d-flex">
           <% if logged_in? %>
-            <span class="me-3">Hi, <%= current_user.name %></span>
             <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-outline-danger" %>
           <% else %>
             <%= link_to "Sign up", signup_path, class: "btn btn-outline-primary me-2" %>
