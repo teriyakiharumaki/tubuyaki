@@ -5,15 +5,15 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Logged in"
+      redirect_to root_path, notice: "ログインに成功しました！"
     else
-      flash.now[:alert] = "Invalid email or password"
+      flash.now[:alert] = "メールアドレスまたはパスワードが間違えています"
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     reset_session
-    redirect_to root_path, notice: "Logged out"
+    redirect_to root_path, notice: "ログアウトしました"
   end
 end
