@@ -30,10 +30,10 @@
           <%= link_to "つぶやき一覧", posts_path, class: "btn btn-link me-3" %>
 
           <% if logged_in? %>
-            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-outline-danger" %>
+            <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-danger" %>
           <% else %>
-            <%= link_to "Sign up", signup_path, class: "btn btn-outline-primary me-2" %>
-            <%= link_to "Log in", login_path, class: "btn btn-primary" %>
+            <%= link_to "ユーザー登録", signup_path, class: "btn btn-outline-primary me-2" %>
+            <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>
