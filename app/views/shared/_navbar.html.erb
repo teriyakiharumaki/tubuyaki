@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">tubuyaki</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#globalNav" aria-controls="globalNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="globalNav">
+      <div class="d-flex align-items-center">
+        <%= link_to "つぶやき一覧", posts_path, class: "btn btn-link me-3" %>
+
+        <% if logged_in? %>
+          <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-danger" %>
+          <%# 例: 自分の投稿へ導線を増やしたければここに追加 %>
+        <% else %>
+          <%= link_to "ユーザー登録", signup_path, class: "btn btn-outline-primary me-2" %>
+          <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -23,24 +23,12 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">tubuyaki</a>
-        <div class="d-flex align-items-center">
-          <%= link_to "つぶやき一覧", posts_path, class: "btn btn-link me-3" %>
+    <%= render "shared/navbar" %>
 
-          <% if logged_in? %>
-            <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-danger" %>
-          <% else %>
-            <%= link_to "ユーザー登録", signup_path, class: "btn btn-outline-primary me-2" %>
-            <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    </nav>
     <div class="container mt-3" id="flash">
       <%= render "shared/flash" %>
     </div>
+
     <%= yield %>
   </body>
 </html>
