@@ -7,15 +7,17 @@
   </div>
 
   <% @posts.each do |post| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="small text-muted mb-1">
-          <strong><%= post.user&.name || "Unknown" %></strong>
-          ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
+    <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="small text-muted mb-1">
+            <strong><%= post.user&.name || "Unknown" %></strong>
+            ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
+          </div>
+          <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
+          <span class="badge bg-light text-dark">いいね <%= post.likes_count %></span>
         </div>
-        <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
-        <span class="badge bg-light text-dark">いいね <%= post.likes_count %></span>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
