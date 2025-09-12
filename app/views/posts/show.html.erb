@@ -6,7 +6,12 @@
         ・ <%= l(@post.created_at, format: :short) rescue @post.created_at.to_s %>
       </div>
       <p class="card-text mb-2"><%= simple_format(h(@post.body)) %></p>
-      <span class="badge bg-light text-dark">いいね <%= @post.likes_count %></span>
+      <%= render "posts/likes", post: @post %>
+      <% if logged_in? %>
+        <div class="mt-3">
+          <%= button_to "いいね", like_post_path(@post), method: :post, class: "btn btn-outline-primary btn-sm" %>
+        </div>
+      <% end %>
     </div>
   </div>
 

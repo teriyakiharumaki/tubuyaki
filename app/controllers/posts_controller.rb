@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  include ActionView::RecordIdentifier 
+
+  before_action :authenticate_user!, only: [:new, :create, :like]
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
@@ -21,6 +23,28 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    @post.increment!(:likes_count)
+    respond_to do |format|
+      format.html { redirect_back fallback_location: post_path(@post), notice: "いいねしました" }
+      format.turbo_stream do
+        flash.now[:notice] = "いいねしました"
+        render turbo_stream: [
+          turbo_stream.replace(
+            dom_id(@post, :likes),
+            partial: "posts/likes",
+            locals: { post: @post }
+          ),
+          turbo_stream.replace(
+            "flash",
+            partial: "shared/flash"
+          )
+        ]
+      end
+    end
   end
 
   private
