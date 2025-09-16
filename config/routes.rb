@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   resources :posts, only: [:index, :new, :create, :show] do
-    post :like, on: :member
+    resource :like, only: [:create, :destroy]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
