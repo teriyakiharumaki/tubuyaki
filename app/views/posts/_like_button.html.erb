@@ -2,18 +2,24 @@
   <% if logged_in? %>
     <% if post.liked_by?(current_user) %>
       <%= button_to post_like_path(post), method: :delete,
-            class: "btn btn-link p-0 text-danger fs-4", data: { turbo: true } do %>
-        <i class="bi bi-heart-fill"></i> <!-- 赤色の塗りつぶしハート -->
+            class: "btn p-0 border-0 bg-transparent text-danger fs-4 d-inline-flex align-items-center",
+            data: { turbo: true } do %>
+        <i class="bi bi-heart-fill"></i>
+        <span class="ms-1"><%= post.likes_count %></span>
       <% end %>
     <% else %>
       <%= button_to post_like_path(post), method: :post,
-            class: "btn btn-link p-0 text-muted fs-4", data: { turbo: true } do %>
-        <i class="bi bi-heart"></i> <!-- グレーのアウトラインハート -->
+            class: "btn p-0 border-0 bg-transparent text-muted fs-4 d-inline-flex align-items-center",
+            data: { turbo: true } do %>
+        <i class="bi bi-heart"></i>
+        <span class="ms-1"><%= post.likes_count %></span>
       <% end %>
     <% end %>
   <% else %>
-    <%= link_to login_path, class: "btn btn-link p-0 text-muted fs-4" do %>
+    <%= link_to login_path,
+          class: "btn p-0 border-0 bg-transparent text-muted fs-4 d-inline-flex align-items-center" do %>
       <i class="bi bi-heart"></i>
+      <span class="ms-1"><%= post.likes_count %></span>
     <% end %>
   <% end %>
 </div>

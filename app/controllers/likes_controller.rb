@@ -10,7 +10,6 @@ class LikesController < ApplicationController
       format.html { redirect_back fallback_location: post_path(@post) }
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace(dom_id(@post, :likes),      partial: "posts/likes",        locals: { post: @post }),
           turbo_stream.replace(dom_id(@post, :like_button), partial: "posts/like_button", locals: { post: @post }),
         ]
       end
@@ -24,7 +23,6 @@ class LikesController < ApplicationController
       format.html { redirect_back fallback_location: post_path(@post) }
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace(dom_id(@post, :likes),       partial: "posts/likes",        locals: { post: @post }),
           turbo_stream.replace(dom_id(@post, :like_button),  partial: "posts/like_button", locals: { post: @post }),
         ]
       end
