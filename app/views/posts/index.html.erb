@@ -8,21 +8,18 @@
 
   <% @posts.each do |post| %>
     <div class="card mb-3 position-relative">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start">
-          <div>
-            <div class="small text-muted mb-1">
-              <strong><%= post.user&.name || "Unknown" %></strong>
-              ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
-            </div>
-            <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
-          </div>
-          <div class="position-relative z-3">
-            <%= render "posts/like_button", post: post %>
-          </div>
+      <div class="card-body position-relative">
+        <div class="small text-muted mb-1">
+          <strong><%= post.user&.name || "Unknown" %></strong>
+          ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
+        </div>
+        <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
+        <div class="mt-2 pt-2 border-top position-relative z-3">
+          <%= render "posts/like_button", post: post %>
         </div>
         <%= link_to "", post_path(post), class: "stretched-link" %>
       </div>
     </div>
   <% end %>
+  
 </div>
