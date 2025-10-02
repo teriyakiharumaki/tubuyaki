@@ -7,7 +7,7 @@
   </div>
 
   <% @posts.each do |post| %>
-    <div class="card mb-3 position-relative">
+    <div id="<%= dom_id(post) %>" class="card mb-3 position-relative">
       <div class="card-body position-relative">
         <div class="small text-muted mb-1">
           <strong><%= post.user&.name || "Unknown" %></strong>
@@ -16,10 +16,16 @@
         <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
         <div class="mt-2 pt-2 border-top position-relative z-3">
           <%= render "posts/like_button", post: post %>
+          <% if logged_in? && post.user_id == current_user.id %>
+            <%= button_to "削除",
+                  post_path(post),
+                  method: :delete,
+                  data: { turbo_confirm: "この投稿を削除します。よろしいですか？" },
+                  class: "btn btn-outline-danger btn-sm mt-2" %>
+          <% end %>
         </div>
         <%= link_to "", post_path(post), class: "stretched-link" %>
       </div>
     </div>
   <% end %>
-  
 </div>

@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   include ActionView::RecordIdentifier 
 
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :set_post, only: [:show, :destroy]
+  before_action :authorize_owner!, only: [:destroy]  
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
@@ -21,11 +23,25 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
+  def show; end
+
+  def destroy
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_path, notice: "投稿を削除しました" }
+      format.turbo_stream
+    end
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def authorize_owner!
+    redirect_to posts_path, alert: "権限がありません" unless @post.user_id == current_user&.id
+  end
 
   def post_params
     params.require(:post).permit(:body)
