@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   include ActionView::RecordIdentifier 
 
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
-  before_action :set_post, only: [:show, :destroy]
-  before_action :authorize_owner!, only: [:destroy]  
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
+  before_action :set_post, only: [:show, :destroy, :edit, :update]
+  before_action :authorize_owner!, only: [:destroy, :edit, :update]  
 
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
@@ -24,6 +24,17 @@ class PostsController < ApplicationController
   end
 
   def show; end
+
+  def edit; end
+
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def destroy
     @post.destroy

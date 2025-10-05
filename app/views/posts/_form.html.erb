@@ -14,5 +14,5 @@
     <%= f.text_area :body, rows: 3, class: "form-control", placeholder: "いまどうしてる？" %>
   </div>
 
-  <%= f.submit "投稿する", class: "btn btn-primary" %>
+  <%= f.submit (post.persisted? ? "更新する" : "投稿する"), class: "btn btn-primary" %>
 <% end %>
