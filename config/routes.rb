@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "static/top"
   root "static#top"
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   get  "signup", to: "users#new"
 
   get  "login",  to: "sessions#new"
