@@ -7,7 +7,7 @@
     <div class="d-inline-flex gap-2">
       <% if logged_in? && current_user.id == @user.id %>
         <%= link_to "プロフィール編集", "#", class: "btn btn-outline-secondary" %>
-        <%= link_to "新規投稿", new_post_path, class: "btn btn-outline-primary" %>
+        <%= link_to "つぶやく", new_post_path, class: "btn btn-outline-primary" %>
       <% end %>
     </div>
   </div>
