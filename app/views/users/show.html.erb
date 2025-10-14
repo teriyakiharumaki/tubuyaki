@@ -3,10 +3,13 @@
     <div>
       <h1 class="h4 mb-1"><%= @user.name %></h1>
       <div class="text-muted">Joined: <%= l(@user.created_at.to_date) %></div>
+      <% if @user.bio.present? %>
+        <div class="mb-3 text-muted"><%= simple_format(h(@user.bio)) %></div>
+      <% end %>
     </div>
     <div class="d-inline-flex gap-2">
       <% if logged_in? && current_user.id == @user.id %>
-        <%= link_to "プロフィール編集", "#", class: "btn btn-outline-secondary" %>
+        <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-outline-secondary" %>
         <%= link_to "つぶやく", new_post_path, class: "btn btn-outline-primary" %>
       <% end %>
     </div>
