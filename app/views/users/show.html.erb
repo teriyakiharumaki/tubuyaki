@@ -3,9 +3,6 @@
     <div>
       <h1 class="h4 mb-1"><%= @user.name %></h1>
       <div class="text-muted">Joined: <%= l(@user.created_at.to_date) %></div>
-      <% if @user.bio.present? %>
-        <div class="mb-3 text-muted"><%= simple_format(h(@user.bio)) %></div>
-      <% end %>
     </div>
     <div class="d-inline-flex gap-2">
       <% if logged_in? && current_user.id == @user.id %>
@@ -14,6 +11,9 @@
       <% end %>
     </div>
   </div>
+  <% if @user.bio.present? %>
+    <div class="mb-3 text-muted"><%= simple_format(h(@user.bio)) %></div>
+  <% end %>
   <hr>
   <h2 class="h5 mb-3">つぶやき一覧</h2>
   <% if @posts.any? %>
