@@ -35,7 +35,7 @@
               <% if logged_in? && post.user_id == current_user.id %>
                 <%= link_to "編集", edit_post_path(post), class: "btn btn-outline-success btn-sm" %>
                 <%= button_to "削除", post_path(post), method: :delete,
-                      data: { turbo_confirm: "この投稿を削除します。よろしいですか？" },
+                      data: { turbo_confirm: "このつぶやきを削除します。よろしいですか？" },
                       class: "btn btn-outline-danger btn-sm" %>
               <% end %>
             </div>
