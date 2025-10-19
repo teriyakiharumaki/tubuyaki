@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="globalNav">
       <div class="d-flex align-items-center">
-        <%= link_to "つぶやき一覧", posts_path, class: "btn btn-link me-3" %>
+        <%= link_to "つぶやき一覧", posts_path, class: "btn btn-outline-primary me-2" %>
 
         <% if logged_in? %>
           <%= link_to "マイページ", user_path(current_user), class: "btn btn-outline-secondary me-2" %>
