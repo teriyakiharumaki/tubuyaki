@@ -5,4 +5,5 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 500 }, allow_blank: true
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :reposts, dependent: :destroy
 end

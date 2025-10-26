@@ -16,8 +16,9 @@
         <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
         <div class="mt-2 pt-2 border-top position-relative z-3
             d-flex justify-content-between align-items-center">
-          <div>
+          <div class="d-inline-flex align-items-center gap-3">
             <%= render "posts/like_button", post: post %>
+            <%= render "posts/repost_button", post: post %>
           </div>
           <div class="d-inline-flex gap-2">
             <% if logged_in? && post.user_id == current_user.id %>
