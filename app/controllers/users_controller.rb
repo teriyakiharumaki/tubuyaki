@@ -19,7 +19,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts.includes(:user).order(created_at: :desc)
+    @user = User.find(params[:id])
+    own_posts = @user.posts
+                     .includes(:user)
+                     .select('posts.*, posts.created_at AS acted_at, NULL::integer AS actor_id, \'post\' AS kind')
+    reposted_posts = Post.joins(:reposts)
+                         .where(reposts: { user_id: @user.id })
+                         .includes(:user)
+                         .select('posts.*, reposts.created_at AS acted_at, reposts.user_id AS actor_id, \'repost\' AS kind')
+    @timeline = (own_posts.to_a + reposted_posts.to_a)
+                  .sort_by { |r| r.acted_at }
+                  .reverse
   end
 
   def edit; end

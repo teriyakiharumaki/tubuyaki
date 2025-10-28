@@ -16,31 +16,39 @@
   <% end %>
   <hr>
   <h2 class="h5 mb-3">つぶやき一覧</h2>
-  <% if @posts.any? %>
-    <% @posts.each do |post| %>
-      <div id="<%= dom_id(post) %>" class="card mb-3 position-relative">
+  <% if @timeline.present? %>
+    <% @timeline.each do |item| %>
+      <div id="<%= dom_id(item) %>" class="card mb-3 position-relative">
         <div class="card-body position-relative">
+          <% if item.kind == "repost" %>
+            <div class="small text-success mb-1">
+              <i class="bi bi-arrow-repeat"></i>
+              リツイートしました（<%= l(item.acted_at, format: :short) %>）
+            </div>
+          <% end %>
+
           <div class="small text-muted mb-1">
-            <strong><%= post.user&.name || "Unknown" %></strong>
-            ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
+            <strong><%= item.user&.name || "Unknown" %></strong>
+            ・ <%= l(item.created_at, format: :short) rescue item.created_at.to_s %>
           </div>
 
-          <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
-          <div class="mt-2 pt-2 border-top position-relative z-3
-            d-flex justify-content-between align-items-center">
-            <div>
-              <%= render "posts/like_button", post: post %>
+          <p class="card-text mb-2"><%= simple_format(h(item.body)) %></p>
+
+          <div class="mt-2 pt-2 border-top position-relative z-3 d-flex justify-content-between align-items-center">
+            <div class="d-inline-flex align-items-center gap-3">
+              <%= render "posts/like_button", post: item %>
+              <%= render "posts/repost_button", post: item %>
             </div>
             <div class="d-inline-flex gap-2">
-              <% if logged_in? && post.user_id == current_user.id %>
-                <%= link_to "編集", edit_post_path(post), class: "btn btn-outline-success btn-sm" %>
-                <%= button_to "削除", post_path(post), method: :delete,
+              <% if logged_in? && item.user_id == current_user.id %>
+                <%= link_to "編集", edit_post_path(item), class: "btn btn-outline-success btn-sm" %>
+                <%= button_to "削除", post_path(item), method: :delete,
                       data: { turbo_confirm: "このつぶやきを削除します。よろしいですか？" },
                       class: "btn btn-outline-danger btn-sm" %>
               <% end %>
             </div>
           </div>
-          <%= link_to "", post_path(post), class: "stretched-link" %>
+          <%= link_to "", post_path(item), class: "stretched-link" %>
         </div>
       </div>
     <% end %>
