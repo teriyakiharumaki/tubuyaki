@@ -3,7 +3,7 @@
     <% if post.reposted_by?(current_user) %>
       <%= button_to post_repost_path(post), method: :delete,
             class: "btn p-0 border-0 bg-transparent text-success fs-4 d-inline-flex align-items-center",
-            data: { turbo: true, turbo_confirm: "リツイートを解除しますか？" } do %>
+            data: { turbo: true, turbo_confirm: "リツイートを取り消しますか？" } do %>
         <i class="bi bi-arrow-repeat"></i>
         <span class="ms-1"><%= post.reposts_count %></span>
       <% end %>
