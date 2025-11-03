@@ -27,8 +27,12 @@
             </div>
           <% end %>
 
-          <div class="small text-muted mb-1">
-            <strong><%= item.user&.name || "Unknown" %></strong>
+          <div class="small text-muted mb-1 position-relative z-3">
+            <% if item.user.present? %>
+              <strong><%= link_to item.user.name, user_path(item.user), class: "text-decoration-none" %></strong>
+            <% else %>
+              <strong>Unknown</strong>
+            <% end %>
             ・ <%= l(item.created_at, format: :short) rescue item.created_at.to_s %>
           </div>
 

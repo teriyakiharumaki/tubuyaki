@@ -9,8 +9,12 @@
   <% @posts.each do |post| %>
     <div id="<%= dom_id(post) %>" class="card mb-3 position-relative">
       <div class="card-body position-relative">
-        <div class="small text-muted mb-1">
-          <strong><%= post.user&.name || "Unknown" %></strong>
+        <div class="small text-muted mb-1 position-relative z-3">
+          <% if post.user.present? %>
+            <strong><%= link_to post.user.name, user_path(post.user), class: "text-decoration-none" %></strong>
+          <% else %>
+            <strong>Unknown</strong>
+          <% end %>
           ・ <%= l(post.created_at, format: :short) rescue post.created_at.to_s %>
         </div>
         <p class="card-text mb-2"><%= simple_format(h(post.body)) %></p>
