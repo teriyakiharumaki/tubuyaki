@@ -27,13 +27,13 @@
           <div class="d-inline-flex gap-2">
             <% if logged_in? && post.user_id == current_user.id %>
               <%= link_to edit_post_path(post),
-                class: "btn btn-sm d-flex align-items-center justify-content-center",
+                class: "btn d-flex align-items-center justify-content-center",
                 title: "編集" do %>
                 <i class="bi bi-pencil"></i>
               <% end %>
               <%= button_to post_path(post), method: :delete,
                 data: { turbo_confirm: "このつぶやきを削除します。よろしいですか？" },
-                class: "btn btn-sm d-flex align-items-center justify-content-center",
+                class: "btn d-flex align-items-center justify-content-center",
                 title: "削除" do %>
                 <i class="bi bi-trash"></i>
               <% end %>
