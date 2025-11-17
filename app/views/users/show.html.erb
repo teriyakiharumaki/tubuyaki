@@ -37,7 +37,7 @@
             <% else %>
               <strong>Unknown</strong>
             <% end %>
-            ・ <%= l(item.created_at, format: :short) rescue item.created_at.to_s %>
+            ・ <%= l(item.created_at, format: :long) rescue item.created_at.to_s %>
           </div>
 
           <p class="card-text mb-2"><%= simple_format(h(item.body)) %></p>
