@@ -2,6 +2,7 @@
   <div class="d-flex align-items-center justify-content-between mb-3">
     <div>
       <h1 class="h4 mb-1"><%= @user.name %></h1>
+      <hr>
       <div class="text-muted mb-1">登録日: <%= l(@user.created_at.to_date) %></div>
       <p class="text-muted mb-1">
         登録から <%= (Date.today - @user.created_at.to_date).to_i %> 日
@@ -15,6 +16,7 @@
       <% end %>
     </div>
   </div>
+  <hr>
   <% if @user.bio.present? %>
     <div class="mb-3 text-muted"><%= simple_format(h(@user.bio)) %></div>
   <% end %>
