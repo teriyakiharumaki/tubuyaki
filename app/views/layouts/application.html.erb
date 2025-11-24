@@ -22,17 +22,19 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%= render "shared/navbar" %>
 
-    <div class="container mt-3" id="flash">
-      <div id="flash_messages">
-        <%= render "shared/flash" %>
+    <main class="flex-fill">
+      <div class="container mt-3" id="flash">
+        <div id="flash_messages">
+          <%= render "shared/flash" %>
+        </div>
       </div>
-    </div>
 
-    <%= yield %>
-
+      <%= yield %>
+    </main>
+    
     <%= render "shared/footer" %>
   </body>
 </html>
