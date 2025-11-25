@@ -18,7 +18,14 @@
   </div>
   <hr>
   <% if @user.bio.present? %>
-    <div class="mb-3 text-muted"><%= simple_format(h(@user.bio)) %></div>
+    <div class="mb-3 text-muted">
+      <%= simple_format(h(@user.bio)) %>
+    </div>
+  <% elsif logged_in? && current_user == @user %>
+    <div class="mb-3 text-muted">
+      自己紹介はまだ設定されていません。<br>
+      「プロフィール編集」から自己紹介を追加してみましょう ✨
+    </div>
   <% end %>
   <hr>
   <h2 class="h5 mb-3">つぶやき一覧</h2>
