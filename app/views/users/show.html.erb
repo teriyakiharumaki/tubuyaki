@@ -11,7 +11,11 @@
     </div>
     <div class="d-inline-flex gap-2">
       <% if logged_in? && current_user.id == @user.id %>
-        <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-outline-success" %>
+        <%= link_to edit_user_path(current_user),
+          class: "btn btn-outline-success d-flex align-items-center justify-content-center",
+          title: "プロフィール編集" do %>
+          <i class="bi bi-pencil"></i>
+        <% end %>
         <%= link_to "つぶやく", new_post_path, class: "btn btn-outline-primary" %>
       <% end %>
     </div>
@@ -25,7 +29,7 @@
   <% elsif logged_in? && current_user == @user %>
     <div class="mb-3 text-muted">
       自己紹介はまだ設定されていません。<br>
-      「プロフィール編集」から自己紹介を追加してみましょう ✨
+      プロフィール横の鉛筆ボタンから自己紹介を追加してみましょう ✨
     </div>
   <% end %>
   <hr>
