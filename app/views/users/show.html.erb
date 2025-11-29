@@ -16,7 +16,11 @@
           title: "プロフィール編集" do %>
           <i class="bi bi-pencil"></i>
         <% end %>
-        <%= link_to "つぶやく", new_post_path, class: "btn btn-outline-primary" %>
+        <%= link_to new_post_path,
+          class: "btn btn-outline-primary d-flex align-items-center gap-1" do %>
+          <span>つぶやく</span>
+          <i class="bi bi-chat-text"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
